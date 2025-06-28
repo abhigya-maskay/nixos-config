@@ -37,21 +37,46 @@
       catppuccin,
       catppuccin-wallpapers,
       ...
-  }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+  }@inputs:
+    let
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+      {
+        packages.operator-mono = pkgs.stdenv.mkDerivation rec {
+          pname = "operator-mono";
+          version = "1.0.0";
 
-          home-manager.users.ave70011 = import ./home;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        }
-      ];
-    };
-  };
+          src = pkgs.fetchFromGithub {
+            owner = "abhigya-maskay";
+            repo = "fonts";
+            rev = "62b8cc45ca0fa7f9798dd907d8400cd15bfe1d2a";
+              sha256 = "thares";
+          };
+
+          installPhase = ''
+            runHook preInstall
+            mkdir -p $out/share/fonts/opentype
+            find . -name "*.otf" -exec install -Dm644 {} -Dm644 {} -t $out/share/fonts/opentype/ \;
+            runHook postinstall
+          '';
+          };
+        nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.ave70011 = import ./home;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+            }
+          ];
+        };
+      };
 }

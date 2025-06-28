@@ -14,6 +14,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  boot.kernelParams = [
+    "processor.max_cstate=1"
+    "idle=nowait"
+    "amd_pstate=passive"
+    "iommu=soft"
+  ];
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   networking.wireless.iwd.enable = true; # Enables iwd
@@ -75,13 +84,6 @@
 
   # Install firefox.
   programs.zsh.enable = true;
-
-  # Steam
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
-  programs.gamemode.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -146,14 +148,6 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-    settings.General = {
-      experimental = true;
-
-      Privacy = "device";
-      JustWorksRepairing = "always";
-      Class = "0x00100";
-      FastConnectable = true;
-    };
   };
 
   hardware.graphics = {
@@ -169,8 +163,10 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.xpadneo.enable = true;
+
+  powerManagement.enable = false;
 
 
   # Some programs need SUID wrappers, can be configured further or are
