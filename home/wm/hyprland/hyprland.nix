@@ -34,6 +34,7 @@
         "waybar"
         "swww init"
         "wallpaper-rotate"
+        "udiskie &"
       ];
 
       general = {

@@ -9,7 +9,7 @@
         position = "top";
         modules-left = ["hyprland/window"];
         modules-center = ["hyprland/workspaces"];
-        modules-right = ["pulseaudio" "network" "cpu" "memory" "temperature" "keyboard-state" "clock"];
+        modules-right = ["pulseaudio" "network" "cpu" "memory" "temperature" "keyboard-state" "clock" "tray"];
 
         "hyprland/workspaces" = {
           format = "{icon}";

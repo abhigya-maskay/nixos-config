@@ -71,6 +71,10 @@
     #media-session.enable = true;
   };
 
+
+  # For automatic disk mounting
+  services.udisks2.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
