@@ -7,6 +7,8 @@
     ormolu
     haskell-language-server
     haskellPackages.hoogle
+    haskellPackages.hie-bios
+    haskellPackages.implicit-hie
     stack
   ];
 }
