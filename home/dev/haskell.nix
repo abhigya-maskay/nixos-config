@@ -5,7 +5,9 @@
     haskellPackages.cabal-gild
     ghc
     ormolu
-    haskell-language-server
+    (haskell-language-server.override {
+        supportedGhcVersions = ["910"];
+    })
     haskellPackages.hoogle
     haskellPackages.hie-bios
     haskellPackages.implicit-hie

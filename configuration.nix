@@ -82,7 +82,7 @@
   users.users.ave70011 = {
     isNormalUser = true;
     description = "Abhigya Maskay";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" "docker" "storage"];
     shell = pkgs.zsh;
   };
 
@@ -122,6 +122,8 @@
     wayland
     xwayland
     wlroots
+    docker
+    docker-compose
   ];
 
   # Adding fonts
@@ -172,6 +174,7 @@
 
   powerManagement.enable = false;
 
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

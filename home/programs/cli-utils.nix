@@ -12,5 +12,7 @@
     pandoc
     ripgrep
     btop
+    zlib
+    zlib.dev
   ];
 }
