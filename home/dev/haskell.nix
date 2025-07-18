@@ -6,7 +6,7 @@
     ghc
     ormolu
     (haskell-language-server.override {
-        supportedGhcVersions = ["910"];
+        supportedGhcVersions = ["910" "984"];
     })
     haskellPackages.hoogle
     haskellPackages.hie-bios
