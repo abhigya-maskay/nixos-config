@@ -25,6 +25,7 @@
       url = "github:orangci/walls-catppuccin-mocha";
       flake = false;
     };
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs = {
@@ -36,6 +37,7 @@
       ghostty,
       catppuccin,
       catppuccin-wallpapers,
+      claude-code,
       ...
   }@inputs:
     let

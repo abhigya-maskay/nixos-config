@@ -7,5 +7,6 @@
     ./fuzzle.nix
     ./swww.nix
     ./yazi.nix
+    ./nerd-fonts.nix
   ];
 }

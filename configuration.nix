@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./fonts.nix
     ];
 
   # Bootloader.
@@ -126,21 +127,6 @@
     docker-compose
   ];
 
-  # Adding fonts
-  fonts.packages = with pkgs; [
-    monaspace
-    font-awesome
-    nerd-fonts.iosevka
-  ];
-
-  fonts.fontconfig = {
-    defaultFonts = {
-      serif = ["Monaspace Xenon Frozen"];
-      sansSerif = ["Monaspace Argon Frozen"];
-      monospace = [ "Monaspace Krypton Frozen" ];
-      emoji = ["Font Awesome 6 Free"];
-    };
-  };
 
   # Adding hyprland cachix
   nix.settings = {

@@ -79,7 +79,6 @@
 
       windowrulev2 = [
         "opacity 0.75 0.75,class:^(com.mitchellh.ghostty)$"
-        "opacity 0.75 0.75,class:^(emacs)$"
         "opacity 0.8 0.8,class:^(Vivaldi-stable)$"
       ];
 

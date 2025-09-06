@@ -4,6 +4,7 @@
     ./archivers.nix
     ./browser.nix
     ./build-tools.nix
+    ./claude.nix
     ./cli-utils.nix
     ./discord.nix
     ./emacs.nix
