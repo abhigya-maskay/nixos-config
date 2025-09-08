@@ -4,7 +4,7 @@
     ./archivers.nix
     ./browser.nix
     ./build-tools.nix
-    ./claude.nix
+    ./genai.nix
     ./cli-utils.nix
     ./discord.nix
     ./emacs.nix
