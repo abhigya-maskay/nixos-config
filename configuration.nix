@@ -109,6 +109,9 @@
   # Gaming performance
   programs.gamemode.enable = true;
 
+  # Tailscale VPN
+  services.tailscale.enable = true;
+
   services.greetd =  {
     enable = true;
     restart = false;
@@ -190,7 +193,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
