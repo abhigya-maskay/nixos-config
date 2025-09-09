@@ -8,6 +8,7 @@
     ./cli-utils.nix
     ./discord.nix
     ./emacs.nix
+    ./gaming.nix
     ./gui.nix
     ./monitors.nix
     ./system-tools.nix

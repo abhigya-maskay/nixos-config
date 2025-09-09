@@ -94,14 +94,27 @@
   nixpkgs.config.allowUnfree = true;
 
   # Hyprland
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # Steam Configuration
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+  };
+
+  # Gaming performance
+  programs.gamemode.enable = true;
 
   services.greetd =  {
     enable = true;
     restart = false;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "greeter";
       };
       initial_session = {
@@ -113,7 +126,6 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
     git
     neovim
@@ -128,14 +140,18 @@
   ];
 
 
-  # Adding hyprland cachix
+  # Adding hyprland cachix and enabling flakes
   nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
     substituters = ["https://hyprland.cachix.org"];
     trusted-substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
-  environment.variables.EDITOR = "nvim";
+  environment.variables = {
+    EDITOR = "nvim";
+    NIXOS_OZONE_WL = "1";
+  };
 
   hardware.bluetooth = {
     enable = true;
@@ -144,6 +160,7 @@
 
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];

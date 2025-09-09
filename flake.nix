@@ -25,7 +25,7 @@
       url = "github:orangci/walls-catppuccin-mocha";
       flake = false;
     };
-    claude-code.url = "github:sadjow/claude-code-nix";
+    nix-ai-tools.url = "github:numtide/nix-ai-tools";
   };
 
   outputs = {
@@ -37,7 +37,7 @@
       ghostty,
       catppuccin,
       catppuccin-wallpapers,
-      claude-code,
+      nix-ai-tools,
       ...
   }@inputs:
     let
@@ -45,24 +45,6 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
       {
-        packages.operator-mono = pkgs.stdenv.mkDerivation rec {
-          pname = "operator-mono";
-          version = "1.0.0";
-
-          src = pkgs.fetchFromGithub {
-            owner = "abhigya-maskay";
-            repo = "fonts";
-            rev = "62b8cc45ca0fa7f9798dd907d8400cd15bfe1d2a";
-              sha256 = "thares";
-          };
-
-          installPhase = ''
-            runHook preInstall
-            mkdir -p $out/share/fonts/opentype
-            find . -name "*.otf" -exec install -Dm644 {} -Dm644 {} -t $out/share/fonts/opentype/ \;
-            runHook postinstall
-          '';
-          };
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
