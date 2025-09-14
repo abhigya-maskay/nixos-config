@@ -5,6 +5,7 @@
     ./haskell.nix
     ./js.nix
     ./nix.nix
+    ./rust.nix
     ./python.nix
     ./ruby.nix
     ./sh.nix

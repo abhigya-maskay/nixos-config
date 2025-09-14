@@ -9,6 +9,7 @@
     # Screen focus
     "$mod, f, togglefloating"
     "$mod, SHIFT f, fullscreen"
+    "$mod, p, pin, active"
 
     # Screen resize
     "$mod CTRL, h, resizeactive, -20 0"
