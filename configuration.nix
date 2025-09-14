@@ -26,7 +26,30 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.wireless.iwd.enable = true; # Enables iwd
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      General = {
+        EnableNetworkConfiguration = false;
+        AddressRandomization = "once";
+      };
+      Network = {
+        EnableIPv6 = false;
+      };
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
+
+  # Configure DHCP client to be more resilient
+  networking.dhcpcd = {
+    enable = true;
+    wait = "background";
+    extraConfig = ''
+      noipv6
+    '';
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -140,6 +163,7 @@
     wlroots
     docker
     docker-compose
+    iw
   ];
 
 
@@ -179,6 +203,26 @@
   hardware.xpadneo.enable = true;
 
   powerManagement.enable = false;
+  
+  # Disable WiFi power management to prevent disconnections
+  networking.extraHosts = ''
+    127.0.0.1 localhost
+  '';
+  
+  # Additional systemd service to disable WiFi power management
+  systemd.services.wifi-power-management = {
+    description = "Disable WiFi power management";
+    after = [ "network-online.target" "sys-subsystem-net-devices-wlan0.device" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 2 && ${pkgs.iw}/bin/iw dev wlan0 set power_save off || true'";
+      Restart = "on-failure";
+      RestartSec = "5s";
+    };
+  };
 
   virtualisation.docker.enable = true;
 

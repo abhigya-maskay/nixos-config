@@ -4,7 +4,7 @@
     # General
     "$mod, return, exec, $terminal"
     "$mod SHIFT, Q, killactive"
-    "$mod SHIFT, l, exec, ${pkgs.hyprlock}/bin/hyprlock"
+    "$mod SHIFT, x, exec, ${pkgs.hyprlock}/bin/hyprlock"
 
     # Screen focus
     "$mod, f, togglefloating"
@@ -46,6 +46,12 @@
     "$mod, l, movefocus, r"
     "$mod, k, movefocus, u"
     "$mod, j, movefocus, d"
+
+    # Window repositioning
+    "$mod SHIFT, h, movewindow, l"
+    "$mod SHIFT, l, movewindow, r"
+    "$mod SHIFT, k, movewindow, u"
+    "$mod SHIFT, j, movewindow, d"
 
     # Applications
     "$mod, e, exec, ${pkgs.yazi}/bin/yazi"
