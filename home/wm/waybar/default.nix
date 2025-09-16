@@ -93,6 +93,7 @@
           format-linked = " {ifname} (No IP)";
           format-disconnected = "⚠ Disconnected";
           format-alt = "{ifname}: {ipaddr}/{cidr}";
+          on-click = "ghostty -e nmtui";
         };
 
         pulseaudio = {

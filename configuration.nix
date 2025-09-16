@@ -25,31 +25,16 @@
   ];
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-  networking.wireless.iwd = {
+  networking.networkmanager = {
     enable = true;
-    settings = {
-      General = {
-        EnableNetworkConfiguration = false;
-        AddressRandomization = "once";
-      };
-      Network = {
-        EnableIPv6 = false;
-      };
-      Settings = {
-        AutoConnect = true;
-      };
-    };
+    # Use default wpa_supplicant backend; switch to "iwd" if desired.
+    # wifi.backend = "iwd";
+    wifi.powersave = false; # disable Wi‑Fi power saving to avoid idle dropouts
+    dns = "systemd-resolved";
   };
 
-  # Configure DHCP client to be more resilient
-  networking.dhcpcd = {
-    enable = true;
-    wait = "background";
-    extraConfig = ''
-      noipv6
-    '';
-  };
+  # Use NetworkManager for DHCP/DNS; disable global DHCP setting.
+  networking.useDHCP = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -209,20 +194,8 @@
     127.0.0.1 localhost
   '';
   
-  # Additional systemd service to disable WiFi power management
-  systemd.services.wifi-power-management = {
-    description = "Disable WiFi power management";
-    after = [ "network-online.target" "sys-subsystem-net-devices-wlan0.device" ];
-    wants = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.bash}/bin/bash -c 'sleep 2 && ${pkgs.iw}/bin/iw dev wlan0 set power_save off || true'";
-      Restart = "on-failure";
-      RestartSec = "5s";
-    };
-  };
+  # systemd-resolved for robust DNS (integrates with NetworkManager and Tailscale)
+  services.resolved.enable = true;
 
   virtualisation.docker.enable = true;
 
