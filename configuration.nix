@@ -31,6 +31,26 @@
     # wifi.backend = "iwd";
     wifi.powersave = false; # disable Wi‑Fi power saving to avoid idle dropouts
     dns = "systemd-resolved";
+    ensureProfiles = {
+      environmentFiles = [ "/etc/nixos/secrets/nm-asus-pd-5g.env" ];
+      profiles.Asus_pd_5G = {
+        connection = {
+          id = "Asus_pd_5G";
+          type = "wifi";
+          permissions = "";
+        };
+        wifi = {
+          ssid = "Asus_pd_5G";
+          mode = "infrastructure";
+        };
+        wifi-security = {
+          key-mgmt = "wpa-psk";
+          psk = "$NM_WIFI_ASUS_PD_5G_PSK";
+        };
+        ipv4.method = "auto";
+        ipv6.method = "auto";
+      };
+    };
   };
 
   # Use NetworkManager for DHCP/DNS; disable global DHCP setting.
@@ -149,6 +169,8 @@
     docker
     docker-compose
     iw
+    linuxHeaders
+    evtest
   ];
 
 

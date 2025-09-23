@@ -6,6 +6,7 @@ let
     '';
 
     shellAliases = {
+      codex = "codex --search";
       e = "emacsclient --create-frame";
       et = "emacsclient --create-frame --tty";
     };

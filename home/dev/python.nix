@@ -8,5 +8,6 @@
     python313Packages.pytest
     python313Packages.setuptools
     pipenv
+    poetry
   ];
 }
