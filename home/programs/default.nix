@@ -10,6 +10,7 @@
     ./emacs.nix
     ./gaming.nix
     ./gui.nix
+    ./zed.nix
     ./monitors.nix
     ./system-tools.nix
     ./terminal.nix
