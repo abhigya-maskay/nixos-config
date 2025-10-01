@@ -5,6 +5,7 @@
     slurp
     wl-clipboard
     swappy
+    hyprshot
     hyprpolkitagent
     hyprland-qtutils
     hyprcursor

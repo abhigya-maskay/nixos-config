@@ -4,4 +4,6 @@
     enable = true;
     package = pkgs.zed-editor;
   };
+
+  home.shellAliases.zed = "zeditor";
 }

@@ -1,7 +1,7 @@
-{config, pkgs, lib, inputs, ...}:
+{ config, pkgs, lib, ... }:
 {
   home.packages = [
-    inputs.ghostty.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.ghostty
   ];
   programs.ghostty = {
     settings = {

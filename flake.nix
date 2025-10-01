@@ -15,9 +15,6 @@
       url = "github:abhigya-maskay/doom_config";
       flake = false;
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
     catppuccin = {
       url = "github:catppuccin/nix";
     };
@@ -34,7 +31,6 @@
       home-manager,
       doomemacs,
       doom-config,
-      ghostty,
       catppuccin,
       catppuccin-wallpapers,
       nix-ai-tools,
