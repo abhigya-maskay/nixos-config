@@ -81,14 +81,17 @@
       windowrulev2 = [
         "opacity 0.75 0.75,class:^(com.mitchellh.ghostty)$"
         "opacity 0.8 0.8,class:^(Vivaldi-stable)$"
-        
+
+        # Path of Building should tile
+        "tile,class:^(pobfrontend)$"
+
         # Steam UI windows should float
         "float,class:^(steam)$,title:^(Steam)$"
         "float,class:^(steam)$,title:^(Friends List)$"
         "float,class:^(steam)$,title:^(Steam - News)$"
         "float,class:^(steam)$,title:^(Steam Settings)$"
         "float,class:^(steam)$,title:^(.* - Properties)$"
-        
+
         # Steam games should tile by default
         "tile,class:^(steam_app_).*$"
         "immediate,class:^(steam_app_).*$"
