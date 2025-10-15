@@ -17,13 +17,6 @@
 
   boot.kernelPackages = pkgs.linuxPackages;
 
-  boot.kernelParams = [
-    "processor.max_cstate=1"
-    "idle=nowait"
-    "amd_pstate=passive"
-    "iommu=soft"
-  ];
-
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager = {
     enable = true;
@@ -202,7 +195,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
