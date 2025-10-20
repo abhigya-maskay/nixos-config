@@ -16,6 +16,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.kernelPackages = pkgs.linuxPackages;
+  # Ensure NVIDIA DRM KMS and disable fbdev to reduce KMS glitches
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=0"
+  ];
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager = {
@@ -185,6 +190,11 @@
     powerOnBoot = true;
   };
 
+  # Wayland/Hyprland workaround for NVIDIA cursor issues
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -197,8 +207,11 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Use long-lived/production NVIDIA driver branch for stability
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    nvidiaPersistenced = true;
   };
+  # Keep NVIDIA device state across client exits (configured in hardware.nvidia block above)
   hardware.cpu.amd.updateMicrocode = true;
   hardware.xpadneo.enable = true;
 

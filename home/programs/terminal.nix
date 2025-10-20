@@ -2,6 +2,7 @@
 {
   home.packages = [
     pkgs.ghostty
+    pkgs.warp-terminal
   ];
   programs.ghostty = {
     settings = {

@@ -1,7 +1,11 @@
 { config, lib, pkgs, inputs, ... }:
 
+let
+  factoryDroid = pkgs.callPackage ./factory-droid.nix {};
+in
 {
-  home.packages = with pkgs; [
+  home.packages = [
+    factoryDroid
     inputs.nix-ai-tools.packages.${pkgs.system}.claude-code
     inputs.nix-ai-tools.packages.${pkgs.system}.claude-code-router
     inputs.nix-ai-tools.packages.${pkgs.system}.codex
