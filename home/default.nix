@@ -24,6 +24,7 @@
     ./programs
     ./dev
     ./wm
+    ./joystick.nix
   ];
 
   home.stateVersion = "25.05";

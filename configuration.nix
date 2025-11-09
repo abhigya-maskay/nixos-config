@@ -169,16 +169,24 @@
     iw
     linuxHeaders
     evtest
+    lxqt.lxqt-openssh-askpass
   ];
 
 
   # Adding hyprland cachix and enabling flakes
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    cores = 12;
+    max-jobs = 2;
+    build-dir = "/var/cache/nix-build";
     substituters = ["https://hyprland.cachix.org"];
     trusted-substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/cache/nix-build 0755 root root -"
+  ];
 
   environment.variables = {
     EDITOR = "nvim";
@@ -193,6 +201,7 @@
   # Wayland/Hyprland workaround for NVIDIA cursor issues
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
+    SUDO_ASKPASS = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
   };
 
   hardware.graphics = {
