@@ -6,5 +6,6 @@
     ./catppuccin.nix
     ./yazi.nix
     ./nerd-fonts.nix
+    ./picom.nix
   ];
 }
