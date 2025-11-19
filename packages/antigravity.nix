@@ -53,6 +53,7 @@ pkgs.stdenv.mkDerivation rec {
     udev
     zlib
     libglvnd
+    gsettings-desktop-schemas
   ];
 
   installPhase = ''
@@ -61,6 +62,9 @@ pkgs.stdenv.mkDerivation rec {
     
     mkdir -p $out/bin
     ln -s $out/share/antigravity/bin/antigravity $out/bin/antigravity
+
+    wrapProgram $out/bin/antigravity \
+      --prefix XDG_DATA_DIRS : "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS"
   '';
 
   desktopItems = [

@@ -50,6 +50,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
 
               home-manager.users.ave70011 = import ./home;
               home-manager.extraSpecialArgs = {

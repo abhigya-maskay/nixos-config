@@ -201,6 +201,8 @@
     videoDrivers = [ "nvidia" ];
     displayManager.startx.enable = true;
   };
+
+  services.autorandr.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;

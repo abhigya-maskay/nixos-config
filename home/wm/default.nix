@@ -7,5 +7,6 @@
     ./yazi.nix
     ./nerd-fonts.nix
     ./picom.nix
+    ./autorandr.nix
   ];
 }
