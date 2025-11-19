@@ -6,9 +6,9 @@ in
 {
   home.packages = [
     factoryDroid
-    inputs.nix-ai-tools.packages.${pkgs.system}.claude-code
-    inputs.nix-ai-tools.packages.${pkgs.system}.claude-code-router
-    inputs.nix-ai-tools.packages.${pkgs.system}.codex
+    inputs.nix-ai-tools.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
+    inputs.nix-ai-tools.packages.${pkgs.stdenv.hostPlatform.system}.claude-code-router
+    inputs.nix-ai-tools.packages.${pkgs.stdenv.hostPlatform.system}.codex
     (pkgs.writeShellScriptBin "context7-mcp" ''
       exec ${pkgs.nodejs}/bin/npx -y @upstash/context7-mcp "$@"
     '')
@@ -26,7 +26,7 @@ in
       export ANTHROPIC_AUTH_TOKEN="$ANTHROPIC_AUTH_TOKEN"
       export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.6"
       export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-4.5-air"
-      exec ${inputs.nix-ai-tools.packages.${pkgs.system}.claude-code}/bin/claude "$@"
+      exec ${inputs.nix-ai-tools.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}/bin/claude "$@"
     '')
   ];
 }

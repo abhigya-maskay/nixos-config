@@ -1,5 +1,6 @@
 # wofi.nix - Place this in your home-manager modules directory
 { config, lib, pkgs, ... }:
+# NOTE: Wofi (Wayland) configuration is no longer imported; kept for reference.
 
 {
   programs.wofi = {

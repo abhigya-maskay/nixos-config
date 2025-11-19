@@ -7,5 +7,6 @@
     gamemode
     protonup-qt
     gamescope
+    itgmania
   ];
 }

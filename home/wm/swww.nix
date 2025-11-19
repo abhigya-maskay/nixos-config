@@ -1,4 +1,5 @@
 {pkgs, inputs, ...}:
+# NOTE: swww wallpaper script is Wayland-only; module retained for reference.
 {
   home.packages = with pkgs; [
     swww

@@ -1,11 +1,9 @@
 {
   imports = [
-    ./hyprland
-    ./waybar
-    ./wofi
+    ./bspwm.nix
+    ./polybar.nix
+    ./feh.nix
     ./catppuccin.nix
-    ./fuzzle.nix
-    ./swww.nix
     ./yazi.nix
     ./nerd-fonts.nix
   ];

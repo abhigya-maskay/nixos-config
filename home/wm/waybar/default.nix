@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+# NOTE: Waybar (Wayland-only) config retained for reference; no longer imported.
 {
   programs.waybar = {
     enable = true;

@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+# NOTE: Hyprland Wayland session config is no longer used; kept for reference.
 {
   home.packages = with pkgs; [
     grim

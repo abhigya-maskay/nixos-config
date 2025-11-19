@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+# NOTE: Hyprland bindings retained for reference; module no longer used.
 {
   wayland.windowManager.hyprland.settings.bind = [
     # General

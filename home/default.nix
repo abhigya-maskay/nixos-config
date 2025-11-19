@@ -6,8 +6,10 @@
 
   programs.git = {
     enable = true;
-    userName = "Abhigya Maskay";
-    userEmail = "ave70011@gmail.com";
+    settings = {
+      user.name = "Abhigya Maskay";
+      user.email = "ave70011@gmail.com";
+    };
   };
 
   programs.starship = {
@@ -18,6 +20,9 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    shellAliases = {
+      gemini = "npx -y @google/gemini-cli";
+    };
   };
 
   imports = [
@@ -25,6 +30,7 @@
     ./dev
     ./wm
     ./joystick.nix
+    ./talon.nix
   ];
 
   home.stateVersion = "25.05";

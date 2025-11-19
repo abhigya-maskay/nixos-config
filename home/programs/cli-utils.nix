@@ -14,6 +14,6 @@
     btop
     zlib
     zlib.dev
-    inputs.nix-ai-tools.packages.${pkgs.system}.gemini-cli
+    ffmpeg
   ];
 }

@@ -119,12 +119,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
   # Steam Configuration
   programs.steam = {
     enable = true;
@@ -138,17 +132,18 @@
   # Tailscale VPN
   services.tailscale.enable = true;
 
-  services.greetd =  {
+  services.greetd = {
     enable = true;
     restart = false;
     settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "greeter";
-      };
+      # Auto-start X11 session for ave70011; fallback to greeter if it exits
       initial_session = {
-        command = "Hyprland";
+        command = "${pkgs.xorg.xinit}/bin/startx";
         user = "ave70011";
+      };
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startx";
+        user = "greeter";
       };
     };
   };
@@ -161,27 +156,22 @@
     wget
     tree
     just
-    wayland
-    xwayland
-    wlroots
     docker
     docker-compose
     iw
     linuxHeaders
     evtest
     lxqt.lxqt-openssh-askpass
+    xorg.xinit
   ];
 
 
-  # Adding hyprland cachix and enabling flakes
+  # Enable flakes and adjust build settings
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     cores = 12;
     max-jobs = 2;
     build-dir = "/var/cache/nix-build";
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   systemd.tmpfiles.rules = [
@@ -190,7 +180,6 @@
 
   environment.variables = {
     EDITOR = "nvim";
-    NIXOS_OZONE_WL = "1";
   };
 
   hardware.bluetooth = {
@@ -198,9 +187,7 @@
     powerOnBoot = true;
   };
 
-  # Wayland/Hyprland workaround for NVIDIA cursor issues
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
     SUDO_ASKPASS = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
   };
 
@@ -209,7 +196,11 @@
     enable32Bit = true;
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+    displayManager.startx.enable = true;
+  };
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -223,6 +214,21 @@
   # Keep NVIDIA device state across client exits (configured in hardware.nvidia block above)
   hardware.cpu.amd.updateMicrocode = true;
   hardware.xpadneo.enable = true;
+
+  # Talon Voice - Tobii eye tracker udev rules
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0127", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0118", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0106", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0128", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="010a", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0102", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0313", GROUP="plugdev", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="2104", ATTRS{idProduct}=="0318", GROUP="plugdev", TAG+="uaccess"
+
+    # Vial keyboard configurator
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  '';
 
   powerManagement.enable = false;
   
