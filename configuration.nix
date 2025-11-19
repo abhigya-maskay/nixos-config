@@ -210,6 +210,7 @@
     # Use long-lived/production NVIDIA driver branch for stability
     package = config.boot.kernelPackages.nvidiaPackages.production;
     nvidiaPersistenced = true;
+    forceFullCompositionPipeline = true;
   };
   # Keep NVIDIA device state across client exits (configured in hardware.nvidia block above)
   hardware.cpu.amd.updateMicrocode = true;

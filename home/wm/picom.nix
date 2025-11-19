@@ -10,6 +10,10 @@
     settings = {
       corner-radius = 12;
       
+      # GLX Performance
+      glx-no-stencil = true;
+      use-damage = true;
+
       # Blur
       blur = {
         method = "dual_kawase";
