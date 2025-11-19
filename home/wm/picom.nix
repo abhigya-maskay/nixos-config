@@ -39,6 +39,12 @@
       fade-in-step = 0.08;
       fade-out-step = 0.08;
       
+      opacity-rule = [
+        "90:class_g = 'Emacs'"
+        "90:class_g = 'Antigravity'"
+        "90:class_g = 'antigravity'"
+      ];
+      
       # Animations (requires a picom fork with animations, but standard config is safe)
       # If using standard picom, these might be ignored or cause warnings, 
       # but usually safe in 'settings'. 
