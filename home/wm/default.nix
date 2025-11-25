@@ -8,5 +8,6 @@
     ./nerd-fonts.nix
     ./picom.nix
     ./autorandr.nix
+    ./dunst.nix
   ];
 }

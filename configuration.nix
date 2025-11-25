@@ -202,7 +202,9 @@
     displayManager.startx.enable = true;
   };
 
+  # Enable autorandr service for automatic profile switching on hotplug
   services.autorandr.enable = true;
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;

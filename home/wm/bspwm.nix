@@ -100,6 +100,7 @@ in
         "${modKey} + e" = fileManagerCmd;
         "${modKey} + d" = launcherCmd;
         "${modKey} + shift + s" = "maim -s | xclip -selection clipboard -t image/png";
+        "${modKey} + shift + m" = "autorandr --change";
       }
       // workspaceBindings
       // moveBindings;
