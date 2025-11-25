@@ -21,7 +21,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     shellAliases = {
-      gemini = "npx -y @google/gemini-cli";
+      gemini = "npx -y @google/gemini-cli@preview";
     };
   };
 

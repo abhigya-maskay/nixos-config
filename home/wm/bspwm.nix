@@ -40,6 +40,8 @@ in
         "sxhkd"
       ];
       extraConfig = ''
+        ${pkgs.xorg.xset}/bin/xset s off -dpms
+
         for monitor in $(bspc query -M); do
           bspc monitor "$monitor" -d ${workspaceList}
         done
