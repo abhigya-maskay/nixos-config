@@ -6,6 +6,10 @@ in
 {
   home.packages = [
     factoryDroid
+    pkgs.gh  # GitHub CLI - required by copilot
+    (pkgs.writeShellScriptBin "copilot" ''
+      exec ${pkgs.nodejs_22}/bin/npx -y @github/copilot "$@"
+    '')
     (pkgs.writeShellScriptBin "claude" ''
       exec ${pkgs.nodejs}/bin/npx -y @anthropic-ai/claude-code "$@"
     '')

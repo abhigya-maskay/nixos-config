@@ -11,7 +11,7 @@ let
         exit 0
       fi
       ${pkgs.feh}/bin/feh --bg-fill "$WALLPAPER"
-      sleep 120
+      ${pkgs.coreutils}/bin/sleep 120
     done
   '';
 in

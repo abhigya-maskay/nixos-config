@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  services.usdiskie = {
+  services.udiskie = {
     enable = true;
     tray = "always";
     notify = true;

@@ -9,5 +9,6 @@
     ./picom.nix
     ./autorandr.nix
     ./dunst.nix
+    ./gnome-keyring.nix
   ];
 }

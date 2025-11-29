@@ -58,9 +58,6 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  # networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -85,6 +82,11 @@
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+
+  # GNOME Keyring - system service and PAM integration
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -113,8 +115,17 @@
     shell = pkgs.zsh;
   };
 
-  # Install firefox.
+  # Enable zsh shell system-wide
   programs.zsh.enable = true;
+
+  # nix-ld for running unpatched binaries (e.g., npm native modules)
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      libsecret
+      glib
+    ];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -136,13 +147,8 @@
     enable = true;
     restart = false;
     settings = {
-      # Auto-start X11 session for ave70011; fallback to greeter if it exits
-      initial_session = {
-        command = "${pkgs.xorg.xinit}/bin/startx";
-        user = "ave70011";
-      };
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd startx";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd startx";
         user = "greeter";
       };
     };
@@ -214,7 +220,7 @@
     # Use long-lived/production NVIDIA driver branch for stability
     package = config.boot.kernelPackages.nvidiaPackages.production;
     nvidiaPersistenced = true;
-    forceFullCompositionPipeline = true;
+    forceFullCompositionPipeline = false;
   };
   # Keep NVIDIA device state across client exits (configured in hardware.nvidia block above)
   hardware.cpu.amd.updateMicrocode = true;

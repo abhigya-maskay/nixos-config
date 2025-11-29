@@ -3,6 +3,7 @@
 {
   home.username = "ave70011";
   home.homeDirectory = "/home/ave70011";
+  home.enableNixpkgsReleaseCheck = false;
 
   programs.git = {
     enable = true;
@@ -10,10 +11,6 @@
       user.name = "Abhigya Maskay";
       user.email = "ave70011@gmail.com";
     };
-  };
-
-  programs.starship = {
-    enable = true;
   };
 
   programs.zsh = {

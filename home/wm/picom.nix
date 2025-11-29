@@ -14,6 +14,9 @@
       glx-no-stencil = true;
       use-damage = true;
 
+      # Bypass compositor for fullscreen windows (improves game performance)
+      unredir-if-possible = true;
+
       # Blur
       blur = {
         method = "dual_kawase";
@@ -22,6 +25,9 @@
       blur-background-exclude = [
         "window_type = 'dock'"
         "window_type = 'desktop'"
+        "class_g = 'Steam'"
+        "class_g = 'steam_app_*'"
+        "class_g = 'steamwebhelper'"
       ];
 
       # Shadows

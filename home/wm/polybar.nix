@@ -69,6 +69,7 @@
         tray-maxsize = 24;
         tray-detached = false;
         enable-ipc = true;
+        wm-restack = "bspwm";
       };
 
       "module/xwindow" = {
