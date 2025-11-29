@@ -49,6 +49,7 @@ in
         bspc config focused_border_color "#f5c2e7"
         bspc config normal_border_color "#313244"
         bspc config active_border_color "#b4befe"
+        bspc rule -a Emacs state=tiled
         bspc rule -a steam state=floating follow=on
         bspc rule -a steam_app_.* state=tiled follow=on
         bspc rule -a pobfrontend state=tiled follow=on
